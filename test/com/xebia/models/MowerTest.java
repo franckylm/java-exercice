@@ -93,6 +93,12 @@ public class MowerTest {
         assertEquals(mower.getCoordinates().getD(), Direction.toEnum('N'));
     }
 
+    @Test
+    public void testToString() throws Exception {
+        mower = new Mower(1, 4, 'S');
+        assertEquals(mower.toString(), "(1, 4, S)");
+    }
+
     /**
      * It is important to always run this test at the end of the Class.
      * Because we're resetting Mower.yCoord class variable to null.

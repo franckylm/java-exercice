@@ -4,9 +4,10 @@ public class Mower {
 
     /**
      * Coordinates of the highest point of the yard.
-     * Shared between all Mower instances.
+     * Class variable, shared by all Mower instances.
      */
     public static Coordinate yCoord;
+
     /**
      * Mower own coordinates.
      */
@@ -155,6 +156,14 @@ public class Mower {
      */
     public void setCoordinates(Direction d) {
         this.mCoord.setD(d);
+    }
+
+    public String toString() {
+        return "(" +
+                this.mCoord.getX() + ", " +
+                this.mCoord.getY() + ", " +
+                this.mCoord.getD().getChar() +
+                ")";
     }
 
 }
