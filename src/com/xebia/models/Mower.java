@@ -13,13 +13,23 @@ public class Mower {
      */
     public static Coordinate yCoord;
 
+    public Mower(int x, int y, Direction d) {
+        this(x, y);
+        this.mCoord = new Coordinate(x, y, d);
+    }
+
     public Mower(int x, int y, char d) {
+        this(x, y);
+        this.mCoord = new Coordinate(x, y, d);
+    }
+
+    private Mower(int x, int y) {
         if(yCoord == null){
             throw new IllegalStateException(
                     "Yard coordinates must be specified before any " +
-                    "Mower object is instantiated.");
+                            "Mower object is instantiated.");
         }
-        this.mCoord = new Coordinate(x, y, d);
+        this.mCoord = new Coordinate(x, y);
     }
 
     /**
@@ -28,22 +38,22 @@ public class Mower {
      */
     public void moveForward() {
         switch (mCoord.getD()) {
-            case 'N':
+            case NORTH:
                 if(mCoord.getY() < yCoord.getY()){
                    mCoord.incrementY();
                 }
                 break;
-            case 'E':
+            case EAST:
                 if(mCoord.getX() < yCoord.getX()){
                     mCoord.incrementX();
                 }
                 break;
-            case 'W':
+            case WEST:
                 if(mCoord.getX() > 0){
                     mCoord.decrementX();
                 }
                 break;
-            case 'S':
+            case SOUTH:
                 if(mCoord.getY() > 0){
                     mCoord.decrementY();
                 }
@@ -58,17 +68,17 @@ public class Mower {
      */
     public void turnLeft() {
         switch (mCoord.getD()) {
-            case 'N':
-                this.setCoordinates('W');
+            case NORTH:
+                this.setCoordinates(Direction.WEST);
                 break;
-            case 'E':
-                this.setCoordinates('N');
+            case EAST:
+                this.setCoordinates(Direction.NORTH);
                 break;
-            case 'S':
-                this.setCoordinates('E');
+            case SOUTH:
+                this.setCoordinates(Direction.EAST);
                 break;
-            case 'W':
-                this.setCoordinates('S');
+            case WEST:
+                this.setCoordinates(Direction.SOUTH);
                 break;
             default:
                 break;
@@ -80,17 +90,17 @@ public class Mower {
      */
     public void turnRight() {
         switch (mCoord.getD()) {
-            case 'N':
-                this.setCoordinates('E');
+            case NORTH:
+                this.setCoordinates(Direction.EAST);
                 break;
-            case 'E':
-                this.setCoordinates('S');
+            case EAST:
+                this.setCoordinates(Direction.SOUTH);
                 break;
-            case 'S':
-                this.setCoordinates('W');
+            case SOUTH:
+                this.setCoordinates(Direction.WEST);
                 break;
-            case 'W':
-                this.setCoordinates('N');
+            case WEST:
+                this.setCoordinates(Direction.NORTH);
                 break;
             default:
                 break;
@@ -110,6 +120,10 @@ public class Mower {
      * Check that method for more information.
      * @param d (Direction in cardinal notation)
      */
+    public void setCoordinates(Direction d) {
+        this.mCoord.setD(d);
+    }
+
     public void setCoordinates(char d) {
         this.mCoord.setD(d);
     }

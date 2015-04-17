@@ -18,22 +18,33 @@ public class Coordinate {
      * Orientation property in cardinal notation.
      * o = {N,E,W,S}
      */
-    private char d;
+    private Direction d;
 
     /**
-     * Instantiate the Coordinate object with x, y and orientation
+     * Instantiate the Coordinate object with x, y, and cardinal direction as an Enum.
+     * @param x
+     * @param y
+     * @param d (Direction in cardinal notation)
+     */
+    public Coordinate(int x, int y, Direction d) {
+        this(x, y);
+        this.d = d;
+    }
+
+    /**
+     * Instantiate the Coordinate object with x, y, and cardinal direction as a char.
      * @param x
      * @param y
      * @param d (Direction in cardinal notation)
      */
     public Coordinate(int x, int y, char d) {
         this(x, y);
-        if(d != 'N' && d != 'E' && d != 'W' && d != 'S') {
+        this.d = Direction.toEnum(d);
+        if(this.d == null) {
             throw new IllegalArgumentException(
                     "Direction parameter must be a valid orientation" +
-                    "In the cardinal notation which are {N, W, S, E}");
+                            "In the cardinal notation which are {N, W, S, E}");
         }
-        this.d = d;
     }
 
     /**
@@ -44,6 +55,36 @@ public class Coordinate {
     public Coordinate(int x, int y) {
         this.x = x;
         this.y = y;
+    }
+
+    /**
+     * Returns the Enum object.
+     * @return Direction
+     */
+    public Direction getD() {
+        return this.d;
+    }
+
+    /**
+     * This method doesn't throw any exception, it simply
+     * Falsy cardinal values are simply ignored.
+     *
+     * @param d (Direction in cardinal notation)
+     */
+    public void setD(Direction d) {
+        this.d = d;
+    }
+
+    /**
+     * {@link #setD(Direction) setD} method
+     * @param d
+     */
+    public void setD(char d) {
+        Direction dEnum = Direction.toEnum(d);
+        if(dEnum == null) {
+            return;
+        }
+        this.setD(dEnum);
     }
 
     public int getX() {
@@ -68,22 +109,5 @@ public class Coordinate {
 
     public void decrementY() {
         --this.y;
-    }
-
-    public char getD() {
-        return d;
-    }
-
-    /**
-     * Although this method doesn't throw an exception, it simply
-     * ignore falsy cardinal values.
-     *
-     * @param d (Direction in cardinal notation)
-     */
-    public void setD(char d) {
-        if(d != 'N' && d != 'E' && d != 'W' && d != 'S') {
-            return;
-        }
-        this.d = d;
     }
 }
