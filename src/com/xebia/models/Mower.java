@@ -27,9 +27,36 @@ public class Mower {
         if(yCoord == null){
             throw new IllegalStateException(
                     "Yard coordinates must be specified before any " +
-                            "Mower object is instantiated.");
+                    "Mower object is instantiated.");
         }
         this.mCoord = new Coordinate(x, y);
+    }
+
+    /**
+     * Take a group of instructions as a string and executes them all.
+     * @param str
+     */
+    public void executeInstructions(String str) {
+        char[] chars = str.toCharArray();
+        for(int i = 0; i < chars.length; i ++) {
+            Instruction single = Instruction.toEnum(chars[i]);
+            if(single == null) {
+                continue;
+            }
+            switch (single) {
+                case FORWARD:
+                    this.moveForward();
+                    break;
+                case LEFT:
+                    this.turnLeft();
+                    break;
+                case RIGHT:
+                    this.turnRight();
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     /**

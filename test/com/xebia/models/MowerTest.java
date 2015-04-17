@@ -34,7 +34,7 @@ public class MowerTest {
     }
 
     @Test
-    public void testLimitsMoveForward() {
+    public void testLimitsMoveForward() throws Exception{
         mower = new Mower(1, 5, Direction.NORTH);
         mower.moveForward();
         assertEquals(mower.getCoordinates().getY(), 5);
@@ -76,6 +76,21 @@ public class MowerTest {
         assertEquals(mower.getCoordinates().getD(), Direction.EAST);
         mower.turnRight();
         assertEquals(mower.getCoordinates().getD(), Direction.SOUTH);
+    }
+
+    @Test
+    public void testExecuteInstruction() throws Exception {
+        mower = new Mower(1, 2, 'N');
+        mower.executeInstructions("GAGAGAGAA");
+        assertEquals(mower.getCoordinates().getX(), 1);
+        assertEquals(mower.getCoordinates().getY(), 3);
+        assertEquals(mower.getCoordinates().getD(), Direction.toEnum('N'));
+
+        mower = new Mower(1, 2, 'N');
+        mower.executeInstructions("ZGAGA GAGAAS");
+        assertEquals(mower.getCoordinates().getX(), 1);
+        assertEquals(mower.getCoordinates().getY(), 3);
+        assertEquals(mower.getCoordinates().getD(), Direction.toEnum('N'));
     }
 
     /**
