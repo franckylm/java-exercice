@@ -28,6 +28,11 @@ public class Coordinate {
      */
     public Coordinate(int x, int y, char d) {
         this(x, y);
+        if(d != 'N' && d != 'E' && d != 'W' && d != 'S') {
+            throw new IllegalArgumentException(
+                    "Direction parameter must be a valid orientation" +
+                    "In the cardinal notation which are {N, W, S, E}");
+        }
         this.d = d;
     }
 
@@ -69,7 +74,16 @@ public class Coordinate {
         return d;
     }
 
+    /**
+     * Although this method doesn't throw an exception, it simply
+     * ignore falsy cardinal values.
+     *
+     * @param d (Direction in cardinal notation)
+     */
     public void setD(char d) {
+        if(d != 'N' && d != 'E' && d != 'W' && d != 'S') {
+            return;
+        }
         this.d = d;
     }
 }

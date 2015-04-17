@@ -15,56 +15,78 @@ public class MowerTest {
     }
 
     @Test
-    public void testForward() throws Exception {
+    public void testMoveForward() throws Exception {
         mower = new Mower(2,2,'N');
-        mower.forward();
+        mower.moveForward();
         assertEquals(mower.getCoordinates().getY(), 3);
 
         mower.setCoordinates('E');
-        mower.forward();
+        mower.moveForward();
         assertEquals(mower.getCoordinates().getX(), 3);
 
         mower.setCoordinates('S');
-        mower.forward();
+        mower.moveForward();
         assertEquals(mower.getCoordinates().getY(), 2);
 
         mower.setCoordinates('W');
-        mower.forward();
+        mower.moveForward();
         assertEquals(mower.getCoordinates().getY(), 2);
 
     }
 
     @Test
-    public void testLimits() {
+    public void testLimitsMoveForward() {
         mower = new Mower(1,5,'N');
-        mower.forward();
+        mower.moveForward();
         assertEquals(mower.getCoordinates().getY(), 5);
 
         mower = new Mower(5,5,'E');
-        mower.forward();
+        mower.moveForward();
         assertEquals(mower.getCoordinates().getX(), 5);
 
         mower = new Mower(2,0,'S');
-        mower.forward();
+        mower.moveForward();
         assertEquals(mower.getCoordinates().getY(), 0);
 
         mower = new Mower(0,0,'W');
-        mower.forward();
+        mower.moveForward();
         assertEquals(mower.getCoordinates().getX(), 0);
     }
 
     @Test
-    public void testPivotLeft() throws Exception {
-
+    public void testTurnLeft() throws Exception {
+        mower = new Mower(3, 3, 'S');
+        mower.turnLeft();
+        assertEquals(mower.getCoordinates().getD(), 'E');
+        mower.turnLeft();
+        assertEquals(mower.getCoordinates().getD(), 'N');
+        mower.turnLeft();
+        assertEquals(mower.getCoordinates().getD(), 'W');
+        mower.turnLeft();
+        assertEquals(mower.getCoordinates().getD(), 'S');
     }
 
     @Test
-    public void testPivotRight() throws Exception {
-
+    public void testTurnRight() throws Exception {
+        mower = new Mower(3, 3, 'S');
+        mower.turnRight();
+        assertEquals(mower.getCoordinates().getD(), 'W');
+        mower.turnRight();
+        assertEquals(mower.getCoordinates().getD(), 'N');
+        mower.turnRight();
+        assertEquals(mower.getCoordinates().getD(), 'E');
+        mower.turnRight();
+        assertEquals(mower.getCoordinates().getD(), 'S');
     }
 
-    @Test
-    public void testGetCoordinates() throws Exception {
-
+    /**
+     * It is important to always run this test at the end of the Class.
+     * Because we're resetting Mower.yCoord class variable to null.
+     * Therefore, an IllegalStateException could be thrown when not expected.
+     */
+    @Test(expected = IllegalStateException.class)
+    public void testStateException() {
+        Mower.yCoord = null;
+        mower = new Mower(1,1,'N');
     }
 }

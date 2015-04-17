@@ -23,11 +23,11 @@ public class Mower {
     }
 
     /**
-     * Step forward in the current direction.
+     * Step moveForward in the current direction.
      * If off limits, then do nothing.
      */
-    public void forward() {
-        switch (this.mCoord.getD()) {
+    public void moveForward() {
+        switch (mCoord.getD()) {
             case 'N':
                 if(mCoord.getY() < yCoord.getY()){
                    mCoord.incrementY();
@@ -56,15 +56,45 @@ public class Mower {
     /**
      * Turns on 90° to the left.
      */
-    public void pivotLeft() {
-
+    public void turnLeft() {
+        switch (mCoord.getD()) {
+            case 'N':
+                this.setCoordinates('W');
+                break;
+            case 'E':
+                this.setCoordinates('N');
+                break;
+            case 'S':
+                this.setCoordinates('E');
+                break;
+            case 'W':
+                this.setCoordinates('S');
+                break;
+            default:
+                break;
+        }
     }
 
     /**
      * Turns on 90° to the right.
      */
-    public void pivotRight() {
-
+    public void turnRight() {
+        switch (mCoord.getD()) {
+            case 'N':
+                this.setCoordinates('E');
+                break;
+            case 'E':
+                this.setCoordinates('S');
+                break;
+            case 'S':
+                this.setCoordinates('W');
+                break;
+            case 'W':
+                this.setCoordinates('N');
+                break;
+            default:
+                break;
+        }
     }
 
     /**
@@ -76,14 +106,11 @@ public class Mower {
     }
 
     /**
-     * Only enable the change of the direction.
-     * Doesn't take into account false direction.
+     * This method uses the setD() method of the Coordinates class.
+     * Check that method for more information.
      * @param d (Direction in cardinal notation)
      */
     public void setCoordinates(char d) {
-        if(d != 'N' && d != 'E' && d != 'W' && d != 'S') {
-            return;
-        }
         this.mCoord.setD(d);
     }
 
