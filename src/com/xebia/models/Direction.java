@@ -2,7 +2,7 @@ package com.xebia.models;
 
 public enum Direction {
 
-    NORTH ('N'), EAST('E'), WEST('W'), SOUTH('S');
+    NORTH('N'), EAST('E'), WEST('W'), SOUTH('S');
 
     /**
      * This represents the direction character.
@@ -22,15 +22,15 @@ public enum Direction {
      * @return Direction
      */
     public static Direction toEnum(char dChar) {
-        for(Direction d : Direction.values()){
-            if(dChar == d.getChar()) {
+        for (Direction d : Direction.values()) {
+            if (dChar == d.getChar()) {
                 return d;
             }
         }
         return null;
     }
 
-    public char getChar () {
+    public char getChar() {
         return this.dChar;
     }
 }

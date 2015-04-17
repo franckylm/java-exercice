@@ -2,7 +2,7 @@ package com.xebia.models;
 
 public enum Instruction {
 
-    LEFT ('G'), RIGHT('D'), FORWARD('A');
+    LEFT('G'), RIGHT('D'), FORWARD('A');
 
     /**
      * This represents the instruction character in french.
@@ -22,8 +22,8 @@ public enum Instruction {
      * @return Direction
      */
     public static Instruction toEnum(char iChar) {
-        for(Instruction i : Instruction.values()){
-            if(iChar == i.getChar()) {
+        for (Instruction i : Instruction.values()) {
+            if (iChar == i.getChar()) {
                 return i;
             }
         }

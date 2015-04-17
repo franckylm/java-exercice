@@ -1,9 +1,8 @@
 package com.xebia.models;
 
 import org.junit.Test;
-import sun.plugin.dom.core.CoreConstants;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class CoordinateTest {
 

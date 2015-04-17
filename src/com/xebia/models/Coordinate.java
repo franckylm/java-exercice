@@ -22,6 +22,7 @@ public class Coordinate {
 
     /**
      * Instantiate the Coordinate object with x, y, and cardinal direction as an Enum.
+     *
      * @param x
      * @param y
      * @param d (Direction in cardinal notation)
@@ -33,6 +34,7 @@ public class Coordinate {
 
     /**
      * Instantiate the Coordinate object with x, y, and cardinal direction as a char.
+     *
      * @param x
      * @param y
      * @param d (Direction in cardinal notation)
@@ -40,7 +42,7 @@ public class Coordinate {
     public Coordinate(int x, int y, char d) {
         this(x, y);
         this.d = Direction.toEnum(d);
-        if(this.d == null) {
+        if (this.d == null) {
             throw new IllegalArgumentException(
                     "Direction parameter must be a valid orientation" +
                             "In the cardinal notation which are {N, W, S, E}");
@@ -49,6 +51,7 @@ public class Coordinate {
 
     /**
      * Instantiate the Coordinate object with only x, y coordinates;
+     *
      * @param x
      * @param y
      */
@@ -59,10 +62,24 @@ public class Coordinate {
 
     /**
      * Returns the Enum object.
+     *
      * @return Direction
      */
     public Direction getD() {
         return this.d;
+    }
+
+    /**
+     * {@link #setD(Direction) setD} method
+     *
+     * @param d
+     */
+    public void setD(char d) {
+        Direction dEnum = Direction.toEnum(d);
+        if (dEnum == null) {
+            return;
+        }
+        this.setD(dEnum);
     }
 
     /**
@@ -73,18 +90,6 @@ public class Coordinate {
      */
     public void setD(Direction d) {
         this.d = d;
-    }
-
-    /**
-     * {@link #setD(Direction) setD} method
-     * @param d
-     */
-    public void setD(char d) {
-        Direction dEnum = Direction.toEnum(d);
-        if(dEnum == null) {
-            return;
-        }
-        this.setD(dEnum);
     }
 
     public int getX() {

@@ -3,15 +3,14 @@ package com.xebia.models;
 public class Mower {
 
     /**
-     * Mower own coordinates.
-     */
-    private Coordinate mCoord;
-
-    /**
      * Coordinates of the highest point of the yard.
      * Shared between all Mower instances.
      */
     public static Coordinate yCoord;
+    /**
+     * Mower own coordinates.
+     */
+    private Coordinate mCoord;
 
     public Mower(int x, int y, Direction d) {
         this(x, y);
@@ -24,23 +23,24 @@ public class Mower {
     }
 
     private Mower(int x, int y) {
-        if(yCoord == null){
+        if (yCoord == null) {
             throw new IllegalStateException(
                     "Yard coordinates must be specified before any " +
-                    "Mower object is instantiated.");
+                            "Mower object is instantiated.");
         }
         this.mCoord = new Coordinate(x, y);
     }
 
     /**
      * Take a group of instructions as a string and executes them all.
+     *
      * @param str
      */
     public void executeInstructions(String str) {
         char[] chars = str.toCharArray();
-        for(int i = 0; i < chars.length; i ++) {
+        for (int i = 0; i < chars.length; i++) {
             Instruction single = Instruction.toEnum(chars[i]);
-            if(single == null) {
+            if (single == null) {
                 continue;
             }
             switch (single) {
@@ -66,22 +66,22 @@ public class Mower {
     public void moveForward() {
         switch (mCoord.getD()) {
             case NORTH:
-                if(mCoord.getY() < yCoord.getY()){
-                   mCoord.incrementY();
+                if (mCoord.getY() < yCoord.getY()) {
+                    mCoord.incrementY();
                 }
                 break;
             case EAST:
-                if(mCoord.getX() < yCoord.getX()){
+                if (mCoord.getX() < yCoord.getX()) {
                     mCoord.incrementX();
                 }
                 break;
             case WEST:
-                if(mCoord.getX() > 0){
+                if (mCoord.getX() > 0) {
                     mCoord.decrementX();
                 }
                 break;
             case SOUTH:
-                if(mCoord.getY() > 0){
+                if (mCoord.getY() > 0) {
                     mCoord.decrementY();
                 }
                 break;
@@ -136,22 +136,24 @@ public class Mower {
 
     /**
      * Returns the Mower coordinates.
+     *
      * @return
      */
     public Coordinate getCoordinates() {
         return this.mCoord;
     }
 
-    /**
-     * This method uses the setD() method of the Coordinates class.
-     * Check that method for more information.
-     * @param d (Direction in cardinal notation)
-     */
-    public void setCoordinates(Direction d) {
+    public void setCoordinates(char d) {
         this.mCoord.setD(d);
     }
 
-    public void setCoordinates(char d) {
+    /**
+     * This method uses the setD() method of the Coordinates class.
+     * Check that method for more information.
+     *
+     * @param d (Direction in cardinal notation)
+     */
+    public void setCoordinates(Direction d) {
         this.mCoord.setD(d);
     }
 

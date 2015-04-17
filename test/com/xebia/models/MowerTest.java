@@ -3,7 +3,7 @@ package com.xebia.models;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class MowerTest {
 
@@ -11,7 +11,7 @@ public class MowerTest {
 
     @Before
     public void setUp() throws Exception {
-        Mower.yCoord = new Coordinate(5,5);
+        Mower.yCoord = new Coordinate(5, 5);
     }
 
     @Test
@@ -34,7 +34,7 @@ public class MowerTest {
     }
 
     @Test
-    public void testLimitsMoveForward() throws Exception{
+    public void testLimitsMoveForward() throws Exception {
         mower = new Mower(1, 5, Direction.NORTH);
         mower.moveForward();
         assertEquals(mower.getCoordinates().getY(), 5);
@@ -101,7 +101,7 @@ public class MowerTest {
     @Test(expected = IllegalStateException.class)
     public void testStateException() {
         Mower.yCoord = null;
-        mower = new Mower(1,1,'N');
+        mower = new Mower(1, 1, 'N');
     }
 
 }
