@@ -11,8 +11,9 @@ import com.xebia.models.Coordinate;
 public class Main {
 
     public static void main(String[] args) {
-        List<String> data = Main.getFileContent("resources/data.txt");
+        List<String> data = Main.getFileContent();
 
+        assert data != null;
         Mower.yCoord = new Coordinate(data.remove(0));
         while(!data.isEmpty()){
             Mower mower = new Mower(data.remove(0));
@@ -20,8 +21,8 @@ public class Main {
         }
     }
 
-    public static List<String> getFileContent(String first) {
-        Path path = FileSystems.getDefault().getPath(first);
+    private static List<String> getFileContent() {
+        Path path = FileSystems.getDefault().getPath("resources/data.txt");
         try{
             return Files.readAllLines(path);
         }catch (Exception e) {

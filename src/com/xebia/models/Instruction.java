@@ -19,7 +19,9 @@ public enum Instruction {
      * If no character matches, then return null.
      *
      * @param iChar
-     * @return Direction
+     *        char to be converted into {@link Instruction} type
+     *
+     * @return the resulting {@link Instruction} or null
      */
     public static Instruction toEnum(char iChar) {
         for (Instruction i : Instruction.values()) {

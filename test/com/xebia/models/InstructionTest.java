@@ -4,9 +4,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created by flibam on 17/04/15.
- */
 public class InstructionTest {
 
     @Test

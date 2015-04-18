@@ -13,43 +13,69 @@ public class Mower {
      */
     private Coordinate mCoord;
 
+    /**
+     * Instantiate a {@link Mower} object with it's coordinates.
+     *
+     * Look {@link com.xebia.models.Coordinate#Coordinate(int, int, Direction)}.
+     */
     public Mower(int x, int y, Direction d) {
         this(x, y);
         this.mCoord = new Coordinate(x, y, d);
     }
 
+    /**
+     * Instantiate a {@link Mower} object with it's coordinates.
+     *
+     * Look {@link com.xebia.models.Coordinate#Coordinate(int, int, char)}
+     */
     public Mower(int x, int y, char d) {
         this(x, y);
         this.mCoord = new Coordinate(x, y, d);
     }
 
+    /**
+     * Instantiate a {@link Mower} object with it's coordinates.
+     * Throw an {@link IllegalStateException} if {@link #yCoord} class variable is not instantiated.
+     *
+     * Look {@link com.xebia.models.Coordinate#Coordinate(String)}
+     */
     public Mower(String str) {
         if (yCoord == null) {
             throw new IllegalStateException(
                     "Yard coordinates must be specified before any " +
-                            "Mower object is instantiated.");
+                    "Mower object is instantiated.");
         }
         this.mCoord = new Coordinate(str);
     }
 
+    /**
+     * Instantiate a {@link Mower} object with it's coordinates.
+     * Can only be used inside the class to avoid Mower object without {@link Direction} specified.
+     *
+     * Throw an {@link IllegalStateException} if {@link #yCoord} class variable is not instantiated.
+     *
+     * Look {@link com.xebia.models.Coordinate#Coordinate(int, int)}
+     */
     private Mower(int x, int y) {
         if (yCoord == null) {
             throw new IllegalStateException(
                     "Yard coordinates must be specified before any " +
-                            "Mower object is instantiated.");
+                    "Mower object is instantiated.");
         }
         this.mCoord = new Coordinate(x, y);
     }
 
     /**
      * Take a group of instructions as a string and executes them all.
+     * Instructions must be valid {@link Instruction} otherwise, will be ignored.
      *
      * @param str
+     *        list of instructions to be executed by the Mower
      */
     public void executeInstructions(String str) {
         char[] chars = str.toCharArray();
-        for (int i = 0; i < chars.length; i++) {
-            Instruction single = Instruction.toEnum(chars[i]);
+        for (char aChar : chars) {
+            Instruction single = Instruction.toEnum(aChar);
             if (single == null) {
                 continue;
             }
@@ -145,11 +171,6 @@ public class Mower {
         }
     }
 
-    /**
-     * Returns the Mower coordinates.
-     *
-     * @return
-     */
     public Coordinate getCoordinates() {
         return this.mCoord;
     }
@@ -176,7 +197,7 @@ public class Mower {
                 ")";
     }
 
-    public void tellMyPosition() {
+    private void tellMyPosition() {
         System.out.println(this.toString());
     }
 

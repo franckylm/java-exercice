@@ -19,7 +19,9 @@ public enum Direction {
      * If no character matches, then return null.
      *
      * @param dChar
-     * @return Direction
+     *        char to be converted into {@link Direction} type
+     *
+     * @return the resulting {@link Direction} or null
      */
     public static Direction toEnum(char dChar) {
         for (Direction d : Direction.values()) {
@@ -30,6 +32,12 @@ public enum Direction {
         return null;
     }
 
+    /**
+     * {@link #toEnum(char)}
+     *
+     * @param dString
+     *        string to be converted into {@link Direction} type
+     */
     public static Direction toEnum(String dString) {
         return Direction.toEnum(dString.charAt(0));
     }

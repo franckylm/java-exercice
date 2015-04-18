@@ -21,11 +21,14 @@ public class Coordinate {
     private Direction d;
 
     /**
-     * Instantiate the Coordinate object with x, y, and cardinal direction as an Enum.
+     * Instantiate a Coordinate object with x, y, and cardinal direction as an Enum.
      *
      * @param x
+     *        x int coordinate in Cartesian system
      * @param y
-     * @param d (Direction in cardinal notation)
+     *        y int coordinate in Cartesian system
+     * @param d
+     *        cardinal direction {@link Direction} Type
      */
     public Coordinate(int x, int y, Direction d) {
         this(x, y);
@@ -33,10 +36,49 @@ public class Coordinate {
     }
 
     /**
-     * This constructor was added to keep the Main code simple,
-     * as the FileSystems.readAllLines(Path) method returns a List of strings.
+     * Instantiate a Coordinate object with x, y, and cardinal direction as a char.
+     * cardinal direction will be converted into {@link Direction}  type.
+     * If invalid direction, an {@link IllegalArgumentException} exception will be thrown.
+     *
+     * @param x
+     *        x int coordinate in Cartesian system
+     * @param y
+     *        y int coordinate in Cartesian system
+     * @param d
+     *        cardinal direction char type
+     */
+    public Coordinate(int x, int y, char d) {
+        this(x, y);
+        this.d = Direction.toEnum(d);
+        if (this.d == null) {
+            throw new IllegalArgumentException(
+                    "Direction parameter must be a valid orientation" +
+                    "In the cardinal notation which are {N, W, S, E}");
+        }
+    }
+
+    /**
+     * Instantiate a Coordinate object with only x, y coordinates.
+     *
+     * @param x
+     *        x int coordinate in Cartesian system
+     * @param y
+     *        y int coordinate in Cartesian system
+     */
+    public Coordinate(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    /**
+     * This constructor was added to keep the Main code simple.
+     * Especially when we get the coordinates from a file.
+     *
+     * An {@link IllegalArgumentException} will be thrown if the
+     * string in the given format doesn't provide at least x an y values.
      *
      * @param str
+     *        coordinates in string eg: "1 2 N"
      */
     public Coordinate(String str) {
         String[] arr = str.split(" ");
@@ -49,44 +91,11 @@ public class Coordinate {
 
         try{
             this.d = Direction.toEnum(arr[2]); //Separated from the rest because not mandatory
-        }catch (IndexOutOfBoundsException e){
+        }catch (IndexOutOfBoundsException ignored){
 
         }
     }
 
-    /**
-     * Instantiate the Coordinate object with x, y, and cardinal direction as a char.
-     *
-     * @param x
-     * @param y
-     * @param d (Direction in cardinal notation)
-     */
-    public Coordinate(int x, int y, char d) {
-        this(x, y);
-        this.d = Direction.toEnum(d);
-        if (this.d == null) {
-            throw new IllegalArgumentException(
-                    "Direction parameter must be a valid orientation" +
-                            "In the cardinal notation which are {N, W, S, E}");
-        }
-    }
-
-    /**
-     * Instantiate the Coordinate object with only x, y coordinates;
-     *
-     * @param x
-     * @param y
-     */
-    public Coordinate(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    /**
-     * Returns the Enum object.
-     *
-     * @return Direction
-     */
     public Direction getD() {
         return this.d;
     }
@@ -95,6 +104,7 @@ public class Coordinate {
      * {@link #setD(Direction) setD} method
      *
      * @param d
+     *        direction in cardinal notation char type
      */
     public void setD(char d) {
         Direction dEnum = Direction.toEnum(d);
@@ -106,9 +116,10 @@ public class Coordinate {
 
     /**
      * This method doesn't throw any exception, it simply
-     * Falsy cardinal values are simply ignored.
+     * False cardinal values are simply ignored.
      *
-     * @param d (Direction in cardinal notation)
+     * @param d
+     *        direction in cardinal notation {@link Direction} type
      */
     public void setD(Direction d) {
         this.d = d;
