@@ -18,11 +18,21 @@ public class CoordinateTest {
         assertEquals(c1.getX(), c2.getX());
         assertEquals(c1.getY(), c2.getY());
         assertEquals(c1.getD(), c2.getD());
+
+        Coordinate c3 = new Coordinate("2 2 N");
+        assertEquals(c2.getX(), c3.getX());
+        assertEquals(c2.getY(), c3.getY());
+        assertEquals(c2.getD(), c3.getD());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testArgumentException() {
         coord = new Coordinate(0, 1, 'D');
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testArgumentStringException() {
+        coord = new Coordinate("1");
     }
 
     @Test

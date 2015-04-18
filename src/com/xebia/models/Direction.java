@@ -30,6 +30,10 @@ public enum Direction {
         return null;
     }
 
+    public static Direction toEnum(String dString) {
+        return Direction.toEnum(dString.charAt(0));
+    }
+
     public char getChar() {
         return this.dChar;
     }

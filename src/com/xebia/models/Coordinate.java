@@ -33,6 +33,28 @@ public class Coordinate {
     }
 
     /**
+     * This constructor was added to keep the Main code simple,
+     * as the FileSystems.readAllLines(Path) method returns a List of strings.
+     *
+     * @param str
+     */
+    public Coordinate(String str) {
+        String[] arr = str.split(" ");
+        try{
+            this.x = Integer.parseInt(arr[0]);
+            this.y = Integer.parseInt(arr[1]);
+        }catch (IndexOutOfBoundsException e){
+            throw new IllegalArgumentException("Invalid coordinates string");
+        }
+
+        try{
+            this.d = Direction.toEnum(arr[2]); //Separated from the rest because not mandatory
+        }catch (IndexOutOfBoundsException e){
+
+        }
+    }
+
+    /**
      * Instantiate the Coordinate object with x, y, and cardinal direction as a char.
      *
      * @param x

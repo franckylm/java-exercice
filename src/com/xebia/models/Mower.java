@@ -23,6 +23,15 @@ public class Mower {
         this.mCoord = new Coordinate(x, y, d);
     }
 
+    public Mower(String str) {
+        if (yCoord == null) {
+            throw new IllegalStateException(
+                    "Yard coordinates must be specified before any " +
+                            "Mower object is instantiated.");
+        }
+        this.mCoord = new Coordinate(str);
+    }
+
     private Mower(int x, int y) {
         if (yCoord == null) {
             throw new IllegalStateException(
@@ -58,6 +67,7 @@ public class Mower {
                     break;
             }
         }
+        this.tellMyPosition();
     }
 
     /**
@@ -144,10 +154,6 @@ public class Mower {
         return this.mCoord;
     }
 
-    public void setCoordinates(char d) {
-        this.mCoord.setD(d);
-    }
-
     /**
      * This method uses the setD() method of the Coordinates class.
      * Check that method for more information.
@@ -158,12 +164,20 @@ public class Mower {
         this.mCoord.setD(d);
     }
 
+    public void setCoordinates(char d) {
+        this.mCoord.setD(d);
+    }
+
     public String toString() {
         return "(" +
                 this.mCoord.getX() + ", " +
                 this.mCoord.getY() + ", " +
                 this.mCoord.getD().getChar() +
                 ")";
+    }
+
+    public void tellMyPosition() {
+        System.out.println(this.toString());
     }
 
 }
