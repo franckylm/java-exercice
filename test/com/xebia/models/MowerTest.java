@@ -96,7 +96,7 @@ public class MowerTest {
     @Test
     public void testToString() throws Exception {
         mower = new Mower(1, 4, 'S');
-        assertEquals(mower.toString(), "(1, 4, S)");
+        assertEquals(mower.toString(), "1 4 S");
     }
 
     /**

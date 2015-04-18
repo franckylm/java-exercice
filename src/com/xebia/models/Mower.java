@@ -190,11 +190,9 @@ public class Mower {
     }
 
     public String toString() {
-        return "(" +
-                this.mCoord.getX() + ", " +
-                this.mCoord.getY() + ", " +
-                this.mCoord.getD().getChar() +
-                ")";
+        return this.mCoord.getX() + " " +
+                this.mCoord.getY() + " " +
+                this.mCoord.getD().getChar();
     }
 
     private void tellMyPosition() {
